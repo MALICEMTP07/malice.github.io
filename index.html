@@ -17,95 +17,94 @@
 
     .center {
       position: absolute;
-      top: 35%;
+      top: 25%;
       width: 100%;
       text-align: center;
-      font-size: 2em;
       z-index: 10;
     }
 
-    .ascii {
-      white-space: pre;
-      font-size: 1.2em;
-      color: white;
-      animation: fadeIn 1s ease-in;
+    .maliceText {
+      font-size: clamp(4em, 20vw, 10em);
+      color: #cc00ff;
+      text-shadow:
+        0 0 10px #cc00ff,
+        0 0 20px #cc00ff,
+        0 0 40px #ff66ff,
+        0 0 80px #ff99ff;
+      animation: neonPulse 2s ease-in-out infinite alternate;
+      display: block;
     }
 
-    .maliceText {
-      font-size: clamp(3em, 15vw, 8em);
-      color: #a64aff;
-      text-shadow:
-        0 0 5px #a64aff,
-        0 0 10px #a64aff,
-        0 0 20px #a64aff,
-        0 0 40px #a64aff;
-      display: none;
+    .maliceText.glitch {
+      animation: glitchOut 0.5s steps(2, end) forwards;
     }
 
     .maliceText .flicker {
       display: inline-block;
-      animation: flicker 2s infinite steps(1);
-    }
-
-    .fadeOut {
-      animation: fadeOut 0.5s ease-out forwards;
+      animation: flicker 1.7s infinite steps(1);
     }
 
     @keyframes flicker {
-      0%, 15%, 25%, 35%, 55%, 65%, 100% {
+      0%, 18%, 22%, 25%, 53%, 57%, 100% {
         opacity: 1;
       }
-      10%, 20%, 30%, 50%, 60% {
+      19%, 23%, 26%, 54%, 56% {
         opacity: 0;
       }
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+    @keyframes neonPulse {
+      from {
+        text-shadow:
+          0 0 5px #cc00ff,
+          0 0 10px #cc00ff,
+          0 0 20px #cc00ff,
+          0 0 40px #ff66ff;
+      }
+      to {
+        text-shadow:
+          0 0 2px #cc00ff,
+          0 0 4px #cc00ff,
+          0 0 8px #cc00ff,
+          0 0 16px #ff66ff;
+      }
     }
 
-    @keyframes fadeOut {
-      to { opacity: 0; transform: scale(1.05); }
+    @keyframes glitchOut {
+      0% { transform: none; opacity: 1; filter: none; }
+      20% { transform: translateX(-5px) rotate(-1deg); opacity: 0.8; filter: hue-rotate(20deg); }
+      40% { transform: translateX(5px) rotate(1deg); opacity: 0.6; filter: hue-rotate(90deg); }
+      60% { transform: translateX(-8px) rotate(-2deg); opacity: 0.4; filter: contrast(200%) saturate(3); }
+      80% { transform: translateX(8px) rotate(2deg); opacity: 0.2; filter: blur(2px); }
+      100% { transform: scale(1.2) rotate(0deg); opacity: 0; filter: brightness(0); }
     }
   </style>
 </head>
 <body>
   <div class="center" id="scene">
-    <pre class="ascii" id="asciiRabbit">  (\_/)
- ( •_•)
- / >△</pre>
     <span class="maliceText" id="maliceText">
       M<span class="flicker">∀</span>LICE
     </span>
   </div>
 
   <script>
-    const ascii = document.getElementById("asciiRabbit");
     const maliceText = document.getElementById("maliceText");
     const scene = document.getElementById("scene");
-    let phase = 0;
+    let triggered = false;
 
-    function nextPhase() {
-      if (phase === 0) {
-        ascii.classList.add("fadeOut");
-        setTimeout(() => {
-          ascii.style.display = "none";
-          maliceText.style.display = "inline-block";
-        }, 500);
-        phase = 1;
-      } else if (phase === 1) {
-        maliceText.classList.add("fadeOut");
+    function glitchAway() {
+      if (!triggered) {
+        triggered = true;
+        maliceText.classList.add("glitch");
         setTimeout(() => {
           scene.style.display = "none";
         }, 500);
-        phase = 2;
       }
     }
 
-    document.addEventListener("click", nextPhase);
-    document.addEventListener("keydown", nextPhase);
-    document.addEventListener("touchstart", nextPhase);
+    document.addEventListener("click", glitchAway);
+    document.addEventListener("keydown", glitchAway);
+    document.addEventListener("touchstart", glitchAway);
   </script>
 </body>
 </html>
