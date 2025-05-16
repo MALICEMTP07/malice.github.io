@@ -38,8 +38,8 @@
       display: inline-block;
     }
 
-    .maliceText.glitchOut {
-      animation: glitchOut 1.2s ease-in-out forwards;
+    .maliceText.fadeOut {
+      animation: fadeOut 0.5s ease-out forwards;
     }
 
     .maliceText .flicker {
@@ -47,45 +47,13 @@
       animation: flicker 3s infinite steps(1);
     }
 
-    .glitch-bg {
-      content: "";
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: repeating-linear-gradient(
-        0deg,
-        rgba(255,0,255,0.1) 0px,
-        rgba(255,0,255,0.1) 1px,
-        transparent 1px,
-        transparent 2px
-      );
-      pointer-events: none;
-      opacity: 0;
-      z-index: 20;
-      animation: none;
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
 
-    .glitch-bg.active {
-      animation: glitchFlash 1.2s steps(2) forwards;
-    }
-
-    @keyframes glitchOut {
-      0% { transform: none; opacity: 1; filter: none; }
-      20% { transform: translateX(-5px) rotate(-1deg); opacity: 0.8; filter: hue-rotate(20deg); }
-      40% { transform: translateX(5px) rotate(1deg); opacity: 0.6; filter: hue-rotate(90deg); }
-      60% { transform: translateX(-8px) rotate(-2deg); opacity: 0.4; filter: contrast(200%) saturate(3); }
-      80% { transform: translateX(8px) rotate(2deg); opacity: 0.2; filter: blur(2px); }
-      100% { transform: scale(1.2) rotate(0deg); opacity: 0; filter: brightness(0); }
-    }
-
-    @keyframes glitchFlash {
-      0% { opacity: 0; filter: hue-rotate(0deg); }
-      25% { opacity: 0.4; filter: hue-rotate(90deg); }
-      50% { opacity: 0.2; filter: hue-rotate(180deg); }
-      75% { opacity: 0.5; filter: hue-rotate(270deg); }
-      100% { opacity: 0; filter: hue-rotate(360deg); }
+    @keyframes fadeOut {
+      to { opacity: 0; transform: scale(1.05); }
     }
 
     @keyframes neonPulse {
@@ -105,9 +73,13 @@
       }
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+    @keyframes flicker {
+      0%, 18%, 22%, 25%, 53%, 57%, 100% {
+        opacity: 1;
+      }
+      19%, 23%, 26%, 54%, 56% {
+        opacity: 0;
+      }
     }
   </style>
 </head>
@@ -117,30 +89,25 @@
       M<span class="flicker">∀</span>LICE
     </span>
   </div>
-  <div class="glitch-bg" id="glitchEffect"></div>
 
   <script>
     const maliceText = document.getElementById("maliceText");
     const maliceWrapper = document.getElementById("malice");
-    const glitchBg = document.getElementById("glitchEffect");
     let triggered = false;
 
-    function glitchAway() {
+    function fadeAway() {
       if (!triggered) {
         triggered = true;
-        maliceText.classList.add("glitchOut");
-        glitchBg.classList.add("active");
-
+        maliceText.classList.add("fadeOut");
         setTimeout(() => {
           maliceWrapper.style.display = "none";
-          glitchBg.style.display = "none";
-        }, 1200);
+        }, 500);
       }
     }
 
-    document.addEventListener("click", glitchAway);
-    document.addEventListener("keydown", glitchAway);
-    document.addEventListener("touchstart", glitchAway);
+    document.addEventListener("click", fadeAway);
+    document.addEventListener("keydown", fadeAway);
+    document.addEventListener("touchstart", fadeAway);
   </script>
 </body>
 </html>
