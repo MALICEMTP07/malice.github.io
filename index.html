@@ -52,6 +52,11 @@
       width: 180px;
       opacity: 0;
       z-index: 5;
+      display: none;
+    }
+
+    .face.show {
+      display: block;
       animation: flashFace 0.8s ease forwards;
     }
 
@@ -129,8 +134,7 @@
 
         faceIds.forEach(id => {
           const face = document.getElementById(id);
-          face.style.opacity = 1;
-          face.style.animation = "flashFace 0.8s ease forwards";
+          face.classList.add("show");
         });
 
         setTimeout(() => {
@@ -147,4 +151,3 @@
   </script>
 </body>
 </html>
-
