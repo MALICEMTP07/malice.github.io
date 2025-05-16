@@ -9,7 +9,7 @@
       margin: 0;
       padding: 0;
       background: #000;
-      color: #33ffcc;
+      color: #fff;
       font-family: 'Courier New', monospace;
       overflow: hidden;
       position: relative;
@@ -17,34 +17,47 @@
 
     .center {
       position: absolute;
-      top: 25%;
+      top: 35%;
       width: 100%;
       text-align: center;
       font-size: 2em;
-      animation: fadeIn 1s ease-in;
-      transition: all 0.5s ease;
       z-index: 10;
+    }
+
+    .ascii {
+      white-space: pre;
+      font-size: 1.2em;
+      color: white;
+      animation: fadeIn 1s ease-in;
     }
 
     .maliceText {
       font-size: clamp(3em, 15vw, 8em);
-      color: #ff00cc;
+      color: #a64aff;
       text-shadow:
-        0 0 5px #ff00cc,
-        0 0 10px #ff00cc,
-        0 0 20px #ff00cc,
-        0 0 40px #ff00cc;
-      animation: neonPulse 2s ease-in-out infinite alternate;
-      display: inline-block;
-    }
-
-    .maliceText.fadeOut {
-      animation: fadeOut 0.5s ease-out forwards;
+        0 0 5px #a64aff,
+        0 0 10px #a64aff,
+        0 0 20px #a64aff,
+        0 0 40px #a64aff;
+      display: none;
     }
 
     .maliceText .flicker {
       display: inline-block;
-      animation: flicker 3s infinite steps(1);
+      animation: flicker 2s infinite steps(1);
+    }
+
+    .fadeOut {
+      animation: fadeOut 0.5s ease-out forwards;
+    }
+
+    @keyframes flicker {
+      0%, 15%, 25%, 35%, 55%, 65%, 100% {
+        opacity: 1;
+      }
+      10%, 20%, 30%, 50%, 60% {
+        opacity: 0;
+      }
     }
 
     @keyframes fadeIn {
@@ -55,59 +68,44 @@
     @keyframes fadeOut {
       to { opacity: 0; transform: scale(1.05); }
     }
-
-    @keyframes neonPulse {
-      from {
-        text-shadow:
-          0 0 5px #ff00cc,
-          0 0 10px #ff00cc,
-          0 0 20px #ff00cc,
-          0 0 40px #ff00cc;
-      }
-      to {
-        text-shadow:
-          0 0 2px #ff00cc,
-          0 0 4px #ff00cc,
-          0 0 10px #ff00cc,
-          0 0 20px #ff00cc;
-      }
-    }
-
-    @keyframes flicker {
-      0%, 18%, 22%, 25%, 53%, 57%, 100% {
-        opacity: 1;
-      }
-      19%, 23%, 26%, 54%, 56% {
-        opacity: 0;
-      }
-    }
   </style>
 </head>
 <body>
-  <div class="center" id="malice">
+  <div class="center" id="scene">
+    <pre class="ascii" id="asciiRabbit">  (\_/)
+ ( •_•)
+ / >△</pre>
     <span class="maliceText" id="maliceText">
       M<span class="flicker">∀</span>LICE
     </span>
   </div>
 
   <script>
+    const ascii = document.getElementById("asciiRabbit");
     const maliceText = document.getElementById("maliceText");
-    const maliceWrapper = document.getElementById("malice");
-    let triggered = false;
+    const scene = document.getElementById("scene");
+    let phase = 0;
 
-    function fadeAway() {
-      if (!triggered) {
-        triggered = true;
+    function nextPhase() {
+      if (phase === 0) {
+        ascii.classList.add("fadeOut");
+        setTimeout(() => {
+          ascii.style.display = "none";
+          maliceText.style.display = "inline-block";
+        }, 500);
+        phase = 1;
+      } else if (phase === 1) {
         maliceText.classList.add("fadeOut");
         setTimeout(() => {
-          maliceWrapper.style.display = "none";
+          scene.style.display = "none";
         }, 500);
+        phase = 2;
       }
     }
 
-    document.addEventListener("click", fadeAway);
-    document.addEventListener("keydown", fadeAway);
-    document.addEventListener("touchstart", fadeAway);
+    document.addEventListener("click", nextPhase);
+    document.addEventListener("keydown", nextPhase);
+    document.addEventListener("touchstart", nextPhase);
   </script>
 </body>
 </html>
