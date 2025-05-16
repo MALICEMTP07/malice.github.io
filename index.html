@@ -63,13 +63,21 @@
       100% { transform: scale(1.2) rotate(0deg); opacity: 0; }
     }
 
+    .content, .love {
+      opacity: 0;
+      transition: opacity 1s ease-in;
+    }
+
+    .content.show, .love.show {
+      opacity: 1;
+    }
+
     .content {
       position: absolute;
       top: 50%;
       width: 100%;
       text-align: center;
       font-size: 1.5em;
-      opacity: 1;
     }
 
     .love {
@@ -79,7 +87,6 @@
       text-align: center;
       font-size: 1.2em;
       color: #ff66cc;
-      opacity: 1;
     }
 
     .heart {
@@ -134,12 +141,20 @@
 
   <script>
     const maliceText = document.getElementById("maliceText");
+    const maliceWrapper = document.getElementById("malice");
+    const content = document.getElementById("plan");
+    const love = document.getElementById("loveText");
     let triggered = false;
 
     function glitchAway() {
       if (!triggered) {
-        maliceText.classList.add("glitchOut");
         triggered = true;
+        maliceText.classList.add("glitchOut");
+        setTimeout(() => {
+          maliceWrapper.style.display = "none";
+          content.classList.add("show");
+          love.classList.add("show");
+        }, 1000);
       }
     }
 
