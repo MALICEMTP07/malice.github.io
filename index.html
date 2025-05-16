@@ -8,29 +8,60 @@
     body, html {
       margin: 0;
       padding: 0;
-      background: black;
+      background: linear-gradient(180deg, #000000 0%, #0a0a0a 100%);
       color: #33ffcc;
       font-family: 'Courier New', monospace;
       overflow: hidden;
+      animation: backgroundPulse 10s infinite alternate;
     }
 
     .center {
       position: absolute;
-      top: 30%;
+      top: 20%;
       width: 100%;
       text-align: center;
       font-size: 2em;
+      animation: fadeIn 1s ease-in;
     }
 
     .maliceText {
-      font-size: 4em;
+      font-size: 7em;
       color: #ff00cc;
-      animation: glitch 0.5s linear infinite;
+      animation: glitch 0.25s infinite, scalePop 3s ease-in-out forwards, flicker 2s infinite;
+      letter-spacing: 0.2em;
+      text-shadow: 0 0 10px #ff00cc, 0 0 20px #ff00cc, 0 0 40px #ff00cc;
+    }
+
+    .ascii-bunny {
+      white-space: pre;
+      font-size: 0.8em;
+      color: #00ffcc;
+      text-align: center;
+      opacity: 0;
+      transition: opacity 2s ease-in;
+    }
+
+    .ascii-bunny.show {
+      opacity: 1;
+    }
+
+    .portal {
+      position: absolute;
+      width: 100vw;
+      height: 100vh;
+      background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(0,0,0,1) 100%);
+      animation: portalSpin 2s ease-in-out forwards;
+      z-index: 999;
+      opacity: 0;
+    }
+
+    .portal.show {
+      opacity: 1;
     }
 
     .content {
       position: absolute;
-      top: 45%;
+      top: 50%;
       width: 100%;
       text-align: center;
       font-size: 1.5em;
@@ -84,29 +115,33 @@
       0%, 100% { transform: scale(1); }
       50% { transform: scale(1.3); }
     }
-  </style>
-</head>
-<body>
-  <div class="center" id="malice">M∀LICE</div>
-  <div class="content" id="plan">
-    <div>was machen wir denn heute?</div>
-    <br>
-    <div>1. zum See mit Aaron</div>
-    <div>2. was Leckeres kochen</div>
-    <div>3. ein Bier trinken irgendwo</div>
-  </div>
-  <div class="love" id="loveText">Ich liebe dich Chelly!<span class="heart">&#10084;</span></div>
 
-  <script>
-    const malice = document.getElementById('malice');
-    const plan = document.getElementById('plan');
-    const love = document.getElementById('loveText');
+    @keyframes scalePop {
+      0% { transform: scale(0.8); opacity: 0; }
+      30% { transform: scale(1.2); opacity: 1; }
+      60% { transform: scale(1); }
+      100% { transform: scale(1); }
+    }
 
-    setTimeout(() => {
-      malice.style.display = 'none';
-      plan.classList.add('show');
-      love.classList.add('show');
-    }, 3000);
-  </script>
-</body>
-</html>
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes flicker {
+      0%, 100% { opacity: 1; }
+      45% { opacity: 0.8; }
+      46% { opacity: 1; }
+      50% { opacity: 0.6; }
+      52% { opacity: 1; }
+      55% { opacity: 0.9; }
+    }
+
+    @keyframes backgroundPulse {
+      0% { background-color: #000; }
+      100% { background-color: #111; }
+    }
+
+    @keyframes portalSpin {
+      0% { transform: scale(0); opacity: 0; }
+      50% { transform:
