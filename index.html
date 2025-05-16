@@ -21,17 +21,46 @@
       text-align: center;
       font-size: 2em;
       animation: fadeIn 1s ease-in;
+      transition: all 0.5s ease;
     }
 
     .maliceText {
-      font-size: 8em;
+      font-size: clamp(3em, 15vw, 8em);
       color: #ff00cc;
       text-shadow:
         0 0 5px #ff00cc,
         0 0 10px #ff00cc,
         0 0 20px #ff00cc,
         0 0 40px #ff00cc;
-      animation: neonPulse 2s ease-in-out infinite alternate, finalGlitch 4s ease-in-out 2s forwards;
+      animation: neonPulse 2s ease-in-out infinite alternate;
+      display: inline-block;
+    }
+
+    .maliceText.glitchOut {
+      animation: glitchOut 0.8s steps(2, end) forwards;
+    }
+
+    .maliceText .flicker {
+      display: inline-block;
+      animation: flicker 3s infinite steps(1);
+    }
+
+    @keyframes flicker {
+      0%, 18%, 22%, 25%, 53%, 57%, 100% {
+        opacity: 1;
+      }
+      19%, 23%, 26%, 54%, 56% {
+        opacity: 0;
+      }
+    }
+
+    @keyframes glitchOut {
+      0% { transform: none; opacity: 1; }
+      20% { transform: translateX(-5px) rotate(-1deg); opacity: 0.8; }
+      40% { transform: translateX(5px) rotate(1deg); opacity: 0.6; }
+      60% { transform: translateX(-8px) rotate(-2deg); opacity: 0.4; }
+      80% { transform: translateX(8px) rotate(2deg); opacity: 0.2; }
+      100% { transform: scale(1.2) rotate(0deg); opacity: 0; }
     }
 
     .content {
@@ -40,11 +69,6 @@
       width: 100%;
       text-align: center;
       font-size: 1.5em;
-      opacity: 0;
-      transition: opacity 1s ease-in;
-    }
-
-    .content.show {
       opacity: 1;
     }
 
@@ -55,11 +79,6 @@
       text-align: center;
       font-size: 1.2em;
       color: #ff66cc;
-      opacity: 0;
-      transition: opacity 1s ease-in;
-    }
-
-    .love.show {
       opacity: 1;
     }
 
@@ -92,32 +111,6 @@
       }
     }
 
-    @keyframes finalGlitch {
-      0% {}
-      80% {
-        transform: scale(1);
-        opacity: 1;
-        filter: hue-rotate(0deg);
-      }
-      85% {
-        transform: scale(1.05) rotate(1deg);
-        filter: hue-rotate(90deg);
-      }
-      90% {
-        transform: scale(0.95) rotate(-1deg);
-        filter: hue-rotate(180deg);
-      }
-      95% {
-        transform: scale(1.1) rotate(2deg);
-        filter: hue-rotate(270deg);
-      }
-      100% {
-        opacity: 0;
-        transform: scale(0.5) rotate(0deg);
-        filter: hue-rotate(360deg);
-      }
-    }
-
     @keyframes fadeIn {
       from { opacity: 0; }
       to { opacity: 1; }
@@ -125,7 +118,11 @@
   </style>
 </head>
 <body>
-  <div class="center" id="malice"><span class="maliceText">M∀LICE</span></div>
+  <div class="center" id="malice">
+    <span class="maliceText" id="maliceText">
+      M<span class="flicker">∀</span>LICE
+    </span>
+  </div>
   <div class="content" id="plan">
     <div>was machen wir denn heute?</div>
     <br>
@@ -136,14 +133,19 @@
   <div class="love" id="loveText">Ich liebe dich Chelly!<span class="heart">&#10084;</span></div>
 
   <script>
-    const malice = document.getElementById('malice');
-    const plan = document.getElementById('plan');
-    const love = document.getElementById('loveText');
+    const maliceText = document.getElementById("maliceText");
+    let triggered = false;
 
-    setTimeout(() => {
-      plan.classList.add('show');
-      love.classList.add('show');
-    }, 6000);
+    function glitchAway() {
+      if (!triggered) {
+        maliceText.classList.add("glitchOut");
+        triggered = true;
+      }
+    }
+
+    document.addEventListener("click", glitchAway);
+    document.addEventListener("keydown", glitchAway);
+    document.addEventListener("touchstart", glitchAway);
   </script>
 </body>
 </html>
