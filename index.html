@@ -39,7 +39,7 @@
     }
 
     .maliceText.glitchOut {
-      animation: glitchOut 0.8s steps(2, end) forwards;
+      animation: glitchOut 1.2s ease-in-out forwards;
     }
 
     .maliceText .flicker {
@@ -47,26 +47,28 @@
       animation: flicker 3s infinite steps(1);
     }
 
-    .face {
-      position: absolute;
-      width: 180px;
+    .glitch-bg {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: repeating-linear-gradient(
+        0deg,
+        rgba(255,0,255,0.1) 0px,
+        rgba(255,0,255,0.1) 1px,
+        transparent 1px,
+        transparent 2px
+      );
+      pointer-events: none;
       opacity: 0;
-      z-index: 5;
-      display: none;
+      z-index: 20;
+      animation: none;
     }
 
-    .face.show {
-      display: block;
-      animation: flashFace 0.8s ease forwards;
-    }
-
-    @keyframes flicker {
-      0%, 18%, 22%, 25%, 53%, 57%, 100% {
-        opacity: 1;
-      }
-      19%, 23%, 26%, 54%, 56% {
-        opacity: 0;
-      }
+    .glitch-bg.active {
+      animation: glitchFlash 1.2s steps(2) forwards;
     }
 
     @keyframes glitchOut {
@@ -76,6 +78,14 @@
       60% { transform: translateX(-8px) rotate(-2deg); opacity: 0.4; filter: contrast(200%) saturate(3); }
       80% { transform: translateX(8px) rotate(2deg); opacity: 0.2; filter: blur(2px); }
       100% { transform: scale(1.2) rotate(0deg); opacity: 0; filter: brightness(0); }
+    }
+
+    @keyframes glitchFlash {
+      0% { opacity: 0; filter: hue-rotate(0deg); }
+      25% { opacity: 0.4; filter: hue-rotate(90deg); }
+      50% { opacity: 0.2; filter: hue-rotate(180deg); }
+      75% { opacity: 0.5; filter: hue-rotate(270deg); }
+      100% { opacity: 0; filter: hue-rotate(360deg); }
     }
 
     @keyframes neonPulse {
@@ -99,13 +109,6 @@
       from { opacity: 0; }
       to { opacity: 1; }
     }
-
-    @keyframes flashFace {
-      0% { opacity: 0; transform: scale(1) rotate(0deg); }
-      30% { opacity: 1; transform: scale(1.1) rotate(2deg); }
-      70% { opacity: 1; transform: scale(0.95) rotate(-2deg); }
-      100% { opacity: 0; transform: scale(1.2) rotate(0deg); }
-    }
   </style>
 </head>
 <body>
@@ -114,34 +117,24 @@
       M<span class="flicker">∀</span>LICE
     </span>
   </div>
-
-  <img src="images/dark_magician_girl_the_magician_s_apprentice_by_chrisclausolas_dj004ro(1).png" class="face" style="top:10%;left:10%;" id="face1">
-  <img src="images/diabellestar_the_black_witch_render_by_chrisclausolas_dg1uwkj.png" class="face" style="top:20%;left:70%;" id="face2">
-  <img src="images/maliss_p_cheshire_cat___render_by_chrisclausolas_dhxvdi1.png" class="face" style="top:60%;left:20%;" id="face3">
-  <img src="images/maliss_p_dormouse___render_by_chrisclausolas_dhy8hwj.png" class="face" style="top:70%;left:65%;" id="face4">
+  <div class="glitch-bg" id="glitchEffect"></div>
 
   <script>
     const maliceText = document.getElementById("maliceText");
     const maliceWrapper = document.getElementById("malice");
-    const faceIds = ["face1", "face2", "face3", "face4"];
+    const glitchBg = document.getElementById("glitchEffect");
     let triggered = false;
 
     function glitchAway() {
       if (!triggered) {
         triggered = true;
         maliceText.classList.add("glitchOut");
-        document.body.style.filter = "contrast(200%) hue-rotate(180deg) blur(1px)";
-
-        faceIds.forEach(id => {
-          const face = document.getElementById(id);
-          face.classList.add("show");
-        });
+        glitchBg.classList.add("active");
 
         setTimeout(() => {
           maliceWrapper.style.display = "none";
-          faceIds.forEach(id => document.getElementById(id).style.display = "none");
-          document.body.style.filter = "none";
-        }, 1000);
+          glitchBg.style.display = "none";
+        }, 1200);
       }
     }
 
