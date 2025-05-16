@@ -8,16 +8,15 @@
     body, html {
       margin: 0;
       padding: 0;
-      background: linear-gradient(180deg, #000000 0%, #0a0a0a 100%);
+      background: #000;
       color: #33ffcc;
       font-family: 'Courier New', monospace;
       overflow: hidden;
-      animation: backgroundPulse 10s infinite alternate;
     }
 
     .center {
       position: absolute;
-      top: 20%;
+      top: 25%;
       width: 100%;
       text-align: center;
       font-size: 2em;
@@ -25,38 +24,14 @@
     }
 
     .maliceText {
-      font-size: 7em;
+      font-size: 8em;
       color: #ff00cc;
-      animation: glitch 0.25s infinite, scalePop 3s ease-in-out forwards, flicker 2s infinite;
-      letter-spacing: 0.2em;
-      text-shadow: 0 0 10px #ff00cc, 0 0 20px #ff00cc, 0 0 40px #ff00cc;
-    }
-
-    .ascii-bunny {
-      white-space: pre;
-      font-size: 0.8em;
-      color: #00ffcc;
-      text-align: center;
-      opacity: 0;
-      transition: opacity 2s ease-in;
-    }
-
-    .ascii-bunny.show {
-      opacity: 1;
-    }
-
-    .portal {
-      position: absolute;
-      width: 100vw;
-      height: 100vh;
-      background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(0,0,0,1) 100%);
-      animation: portalSpin 2s ease-in-out forwards;
-      z-index: 999;
-      opacity: 0;
-    }
-
-    .portal.show {
-      opacity: 1;
+      text-shadow:
+        0 0 5px #ff00cc,
+        0 0 10px #ff00cc,
+        0 0 20px #ff00cc,
+        0 0 40px #ff00cc;
+      animation: neonPulse 2s ease-in-out infinite alternate, finalGlitch 4s ease-in-out 2s forwards;
     }
 
     .content {
@@ -82,7 +57,6 @@
       color: #ff66cc;
       opacity: 0;
       transition: opacity 1s ease-in;
-      animation: pulse 2s infinite;
     }
 
     .love.show {
@@ -96,52 +70,80 @@
       animation: beat 1s infinite;
     }
 
-    @keyframes glitch {
-      0% { text-shadow: 2px 2px red; }
-      20% { text-shadow: -2px -1px lime; }
-      40% { text-shadow: 2px -2px blue; }
-      60% { text-shadow: -1px 2px magenta; }
-      80% { text-shadow: 1px -1px cyan; }
-      100% { text-shadow: 2px 2px red; }
-    }
-
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.1); color: #ff99cc; }
-      100% { transform: scale(1); }
-    }
-
     @keyframes beat {
       0%, 100% { transform: scale(1); }
       50% { transform: scale(1.3); }
     }
 
-    @keyframes scalePop {
-      0% { transform: scale(0.8); opacity: 0; }
-      30% { transform: scale(1.2); opacity: 1; }
-      60% { transform: scale(1); }
-      100% { transform: scale(1); }
+    @keyframes neonPulse {
+      from {
+        text-shadow:
+          0 0 5px #ff00cc,
+          0 0 10px #ff00cc,
+          0 0 20px #ff00cc,
+          0 0 40px #ff00cc;
+      }
+      to {
+        text-shadow:
+          0 0 2px #ff00cc,
+          0 0 4px #ff00cc,
+          0 0 10px #ff00cc,
+          0 0 20px #ff00cc;
+      }
+    }
+
+    @keyframes finalGlitch {
+      0% {}
+      80% {
+        transform: scale(1);
+        opacity: 1;
+        filter: hue-rotate(0deg);
+      }
+      85% {
+        transform: scale(1.05) rotate(1deg);
+        filter: hue-rotate(90deg);
+      }
+      90% {
+        transform: scale(0.95) rotate(-1deg);
+        filter: hue-rotate(180deg);
+      }
+      95% {
+        transform: scale(1.1) rotate(2deg);
+        filter: hue-rotate(270deg);
+      }
+      100% {
+        opacity: 0;
+        transform: scale(0.5) rotate(0deg);
+        filter: hue-rotate(360deg);
+      }
     }
 
     @keyframes fadeIn {
       from { opacity: 0; }
       to { opacity: 1; }
     }
+  </style>
+</head>
+<body>
+  <div class="center" id="malice"><span class="maliceText">M∀LICE</span></div>
+  <div class="content" id="plan">
+    <div>was machen wir denn heute?</div>
+    <br>
+    <div>1. zum See mit Aaron</div>
+    <div>2. was Leckeres kochen</div>
+    <div>3. ein Bier trinken irgendwo</div>
+  </div>
+  <div class="love" id="loveText">Ich liebe dich Chelly!<span class="heart">&#10084;</span></div>
 
-    @keyframes flicker {
-      0%, 100% { opacity: 1; }
-      45% { opacity: 0.8; }
-      46% { opacity: 1; }
-      50% { opacity: 0.6; }
-      52% { opacity: 1; }
-      55% { opacity: 0.9; }
-    }
+  <script>
+    const malice = document.getElementById('malice');
+    const plan = document.getElementById('plan');
+    const love = document.getElementById('loveText');
 
-    @keyframes backgroundPulse {
-      0% { background-color: #000; }
-      100% { background-color: #111; }
-    }
-
-    @keyframes portalSpin {
-      0% { transform: scale(0); opacity: 0; }
-      50% { transform:
+    setTimeout(() => {
+      plan.classList.add('show');
+      love.classList.add('show');
+    }, 6000);
+  </script>
+</body>
+</html>
