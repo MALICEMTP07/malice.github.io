@@ -109,8 +109,6 @@
   </div>
 
   <script>
-    const namespace = "malice-netrot";
-    const key = "start"; // kannst du beliebig ändern
     const maliceText = document.getElementById("maliceText");
     const scene = document.getElementById("scene");
     let phase = 0;
@@ -143,7 +141,8 @@
           scene.style.display = "none";
           document.body.removeChild(overlay);
 
-          fetch(`https://api.countapi.xyz/hit/${namespace}/${key}`)
+          // API über counterapi.dev
+          fetch(`https://counterapi.dev/api/malice-netrot/start/hit`)
             .then(res => res.json())
             .then(data => {
               animateCounter(data.value);
