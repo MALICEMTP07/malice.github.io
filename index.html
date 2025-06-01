@@ -11,8 +11,7 @@
       background: #000;
       color: #fff;
       font-family: 'Courier New', monospace;
-      overflow: visible;
-      position: relative;
+      overflow: hidden;
       height: 100vh;
     }
 
@@ -23,11 +22,10 @@
       transform: translate(-50%, -50%);
       width: 100%;
       text-align: center;
-      font-size: 1.2em;
       z-index: 10;
     }
 
-    .maliceText {
+    .maliceText, .counterDisplay {
       font-size: clamp(3em, 18vw, 8em);
       color: #a64aff;
       text-shadow:
@@ -47,19 +45,6 @@
       animation: fadeOut 0.5s ease-out forwards;
     }
 
-    .content {
-      padding: 5vh 10vw;
-      font-size: 1.1em;
-      line-height: 1.6;
-      display: none;
-      animation: fadeIn 1s ease-in forwards;
-    }
-
-    h1, h2 {
-      color: #a64aff;
-      text-shadow: 0 0 10px #a64aff;
-    }
-
     @keyframes flicker {
       0%, 15%, 25%, 35%, 55%, 65%, 100% {
         opacity: 1;
@@ -69,18 +54,14 @@
       }
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
     @keyframes fadeOut {
       to { opacity: 0; transform: scale(1.05); }
     }
 
     .glitchOverlay {
       position: fixed;
-      top: 0; left: 0;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
       background: #000;
@@ -109,6 +90,15 @@
         filter: none;
       }
     }
+
+    .counterDisplay {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      white-space: nowrap;
+    }
   </style>
 </head>
 <body>
@@ -118,40 +108,28 @@
     </span>
   </div>
 
-  <div class="content" id="partTwo">
-    <h1>Was ist M∀LICE?</h1>
-    <p>
-      <strong>M∀LICE</strong> ist eine Fusion aus <em>Alice im Wunderland</em> und <em>Malware</em>. Das umgedrehte A (∀) steht für die verdrehte, surreale Welt, in die Alice fällt – hier übersetzt in die subversive Realität des Hackens. Was auf den ersten Blick nur wie ein Name aussieht, ist in Wahrheit eine Einladung: Folge dem weißen Kaninchen in die Tiefen des Cyberspace.
-    </p>
-    <p>
-      "Wir sind alle verrückt hier." — und genau das ist der Reiz. Die Welt der Sicherheit ist ein Irrgarten. Ich bin nicht die Alice, die sich verirrt – ich bin die, die den Spiegel kontrolliert.
-    </p>
-
-    <h2>Über mich</h2>
-    <p>
-      Ich bin Josef, auch bekannt als <strong>M∀LICE</strong> – Hacker, Künstler, Visionär. Ich vereine Kreativität mit technischer Finesse. Als Tattooartist bringe ich Linien unter die Haut, als Hacker bringe ich Systeme zum Tanzen.
-    </p>
-    <p>
-      Meine Skills reichen von Social Engineering über OSINT bis hin zu Pentesting. Ich sehe Technik nicht nur als Werkzeug, sondern als Sprache – und ich spreche sie fließend. Ich liebe Anonymität, Ästhetik, Kontrolle und Glitch.
-    </p>
-    <p>
-      M∀LICE ist kein Projekt – es ist eine Bewegung. Ein digitaler Spiegel einer inneren Welt, die Regeln bricht, Träume hakt und aus Exploits Kunst macht. "Wenn du nicht weißt, wo du hinwillst, ist jeder Exploit der richtige."
-    </p>
-
-    <h2>Netzwerk statt Zirkus – meine Arbeit an Schulen</h2>
-    <p>
-      M∀LICE ist mehr als Code und Kunst. Ich halte kostenlose Vorträge und Workshops an Schulen, um junge Menschen für Technik, Ethik und digitale Selbstverteidigung zu begeistern. Wir sprechen über Datenschutz, Passwortsicherheit, Social Media, KI, Manipulation – und wie man sich schützt.
-    </p>
-    <p>
-      Die digitale Welt ist kein Wunderland. Aber mit Wissen wird sie weniger gefährlich. Mein Ziel ist es, Kindern nicht nur Technik beizubringen – sondern Verantwortung. Denn die Grenze zwischen Magie und Technik ist nur Bildung.
-    </p>
-  </div>
-
   <script>
+    const namespace = "malice-netrot";
+    const key = "start"; // kannst du beliebig ändern
     const maliceText = document.getElementById("maliceText");
     const scene = document.getElementById("scene");
-    const partTwo = document.getElementById("partTwo");
     let phase = 0;
+
+    function animateCounter(targetValue) {
+      let counterValue = 0;
+      const counter = document.createElement("div");
+      counter.className = "counterDisplay";
+      counter.textContent = "0";
+      document.body.appendChild(counter);
+
+      const speed = Math.max(10, 2000 / targetValue);
+
+      const interval = setInterval(() => {
+        counterValue++;
+        counter.textContent = counterValue;
+        if (counterValue >= targetValue) clearInterval(interval);
+      }, speed);
+    }
 
     function triggerGlitchTransition() {
       if (phase === 0) {
@@ -163,8 +141,13 @@
 
         setTimeout(() => {
           scene.style.display = "none";
-          partTwo.style.display = "block";
           document.body.removeChild(overlay);
+
+          fetch(`https://api.countapi.xyz/hit/${namespace}/${key}`)
+            .then(res => res.json())
+            .then(data => {
+              animateCounter(data.value);
+            });
         }, 600);
 
         phase = 1;
