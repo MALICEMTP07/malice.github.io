@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>M∀LICE + Josef - Tattoo Artist</title>
+  <title>M∀LICE + Josef – Tattoo</title>
   <style>
     html, body {
       margin: 0;
@@ -149,44 +149,50 @@
       z-index: 99;
     }
 
-    /* Werbung für das Tattoo-Kabinett */
     .tattoo-advert {
       position: fixed;
-      top: 20px;
-      right: 20px;
-      background: rgba(255, 255, 255, 0.1);
-      padding: 20px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(255, 255, 255, 0.05);
+      padding: 30px;
       border-radius: 10px;
       color: #fff;
-      font-size: 1.5em;
+      font-size: 1.2em;
       font-family: 'Courier New', monospace;
       z-index: 1000;
-      animation: fadeInAdvert 2s ease-out;
+      display: none;
+      text-align: center;
+      width: 80%;
+      max-width: 500px;
     }
 
-    @keyframes fadeInAdvert {
-      0% {
-        opacity: 0;
-      }
-      100% {
-        opacity: 1;
-      }
+    .tattoo-advert.show {
+      display: block;
+      animation: fadeInAdvert 2s ease-out;
     }
 
     .tattoo-advert h1 {
       font-size: 2em;
       color: #a64aff;
       text-shadow: 0 0 5px #a64aff;
+      margin-bottom: 0.5em;
     }
 
     .tattoo-advert p {
       font-size: 1em;
+      line-height: 1.5em;
     }
 
     .tattoo-advert a {
       color: #a64aff;
       text-decoration: none;
       font-weight: bold;
+    }
+
+    @keyframes fadeInAdvert {
+      from { opacity: 0; transform: translate(-50%, -60%); }
+      to { opacity: 1; transform: translate(-50%, -50%); }
     }
   </style>
 </head>
@@ -199,18 +205,19 @@
 
   <div class="josefName" id="josefName">Josef</div>
 
-  <div class="tattoo-advert">
+  <div class="tattoo-advert" id="tattooAdvert">
     <h1>Tattoo Artist in Neustrelitz</h1>
-    <p>Hochwertige Tattoos, individuell und kreativ – Nur im <strong>Tattoo-Kabinett Neustrelitz</strong>.</p>
-    <p>Jetzt einen Termin buchen und dein einzigartiges Tattoo von Josef gestalten lassen!</p>
-    <p><a href="mailto:kontakt@deinemail.com">Kontaktieren Sie uns hier für Termine und Anfragen.</a></p>
-    <p>Termine sind verfügbar – Schnell anfragen!</p>
+    <p>Kreativ. Ausdrucksstark. Einzigartig.</p>
+    <p>Im <strong>Tattoo-Kabinett Neustrelitz</strong> entstehen Kunstwerke unter die Haut – mit Hingabe und Stil.</p>
+    <p>Jetzt zeitnahe Termine sichern – individuell & persönlich.</p>
+    <p><a href="mailto:kontakt@deinemail.com">→ Termin anfragen</a></p>
   </div>
 
   <script>
     const maliceText = document.getElementById("maliceText");
     const scene = document.getElementById("scene");
     const nameText = document.getElementById("josefName");
+    const advert = document.getElementById("tattooAdvert");
     let phase = 0;
     let loopActive = true;
 
@@ -221,11 +228,16 @@
         overlay.classList.add("glitchOverlay");
         document.body.appendChild(overlay);
         maliceText.classList.add("fadeOut");
+
         setTimeout(() => {
           scene.style.display = "none";
           document.body.removeChild(overlay);
           document.body.appendChild(document.createElement("div")).classList.add("blackout");
+
+          // Werbung zeigen
+          advert.classList.add("show");
         }, 600);
+
         phase = 1;
       }
     }
