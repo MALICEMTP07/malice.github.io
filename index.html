@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>M∀LICE + Josef</title>
+  <title>M∀LICE + Josef - Tattoo Artist</title>
   <style>
     html, body {
       margin: 0;
@@ -90,7 +90,6 @@
       }
     }
 
-    /* Flummi */
     .dot {
       width: 40px;
       height: 40px;
@@ -149,6 +148,46 @@
       background: #000;
       z-index: 99;
     }
+
+    /* Werbung für das Tattoo-Kabinett */
+    .tattoo-advert {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 20px;
+      border-radius: 10px;
+      color: #fff;
+      font-size: 1.5em;
+      font-family: 'Courier New', monospace;
+      z-index: 1000;
+      animation: fadeInAdvert 2s ease-out;
+    }
+
+    @keyframes fadeInAdvert {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+
+    .tattoo-advert h1 {
+      font-size: 2em;
+      color: #a64aff;
+      text-shadow: 0 0 5px #a64aff;
+    }
+
+    .tattoo-advert p {
+      font-size: 1em;
+    }
+
+    .tattoo-advert a {
+      color: #a64aff;
+      text-decoration: none;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
@@ -159,6 +198,14 @@
   </div>
 
   <div class="josefName" id="josefName">Josef</div>
+
+  <div class="tattoo-advert">
+    <h1>Tattoo Artist in Neustrelitz</h1>
+    <p>Hochwertige Tattoos, individuell und kreativ – Nur im <strong>Tattoo-Kabinett Neustrelitz</strong>.</p>
+    <p>Jetzt einen Termin buchen und dein einzigartiges Tattoo von Josef gestalten lassen!</p>
+    <p><a href="mailto:kontakt@deinemail.com">Kontaktieren Sie uns hier für Termine und Anfragen.</a></p>
+    <p>Termine sind verfügbar – Schnell anfragen!</p>
+  </div>
 
   <script>
     const maliceText = document.getElementById("maliceText");
@@ -187,7 +234,6 @@
     document.addEventListener("keydown", triggerGlitchTransition);
     document.addEventListener("touchstart", triggerGlitchTransition);
 
-    // Flummi-Loop
     function startDotLoop() {
       if (!loopActive) return;
       const dot = document.createElement("div");
@@ -210,7 +256,6 @@
       }, 1500);
     }
 
-    // Start loop
     setTimeout(() => {
       startDotLoop();
     }, 1500);
