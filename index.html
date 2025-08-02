@@ -2,46 +2,161 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <title>Home</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>M∀LICE – Home</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #000;
+      color: white;
+      font-family: 'Press Start 2P', monospace;
+      overflow-x: hidden;
+    }
+
+    .title {
+      text-align: center;
+      margin-top: 4rem;
+    }
+
+    .title h1 {
+      font-size: 1.2rem;
+      color: #fff;
+      text-shadow: 0 0 5px red, 0 0 10px black;
+    }
+
+    .title h1 span {
+      color: red;
+      text-shadow: 0 0 3px white;
+    }
+
+    .title p {
+      color: #ff0;
+      font-size: 0.6rem;
+      margin-top: 0.5rem;
+      letter-spacing: 1px;
+    }
+
+    .desc {
+      max-width: 600px;
+      margin: 2rem auto;
+      text-align: center;
+      font-size: 0.5rem;
+      line-height: 1.6;
+      color: #ccc;
+      padding: 0 1rem;
+    }
+
+    .menu {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 3rem;
+      gap: 2rem;
+    }
+
+    .p5-button {
+      background: red;
+      color: white;
+      font-size: 1rem;
+      padding: 1rem 2rem;
+      border: 3px solid white;
+      box-shadow: 4px 4px 0 black;
+      position: relative;
+      transition: all 0.15s ease;
+      cursor: pointer;
+      transform: skew(-10deg);
+    }
+
+    .p5-button::after {
+      content: '';
+      position: absolute;
+      top: -8px;
+      left: -8px;
+      width: 100%;
+      height: 100%;
+      border: 2px solid white;
+      transform: skew(-10deg);
+      opacity: 0.6;
+    }
+
+    .p5-button:hover {
+      background: white;
+      color: red;
+      transform: skew(-10deg) scale(1.05);
+      box-shadow: 6px 6px 0 black;
+    }
+
+    .background {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background: radial-gradient(ellipse at center, #111 0%, #000 100%);
+      overflow: hidden;
+    }
+
+    .stars, .splatter {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-repeat: repeat;
+      opacity: 0.08;
+      pointer-events: none;
+    }
+
+    .stars {
+      background-image: url('https://i.imgur.com/qVCkxgJ.png');
+    }
+
+    .splatter {
+      background-image: url('https://i.imgur.com/6tV2VYV.png');
+    }
+
+    footer {
+      text-align: center;
+      font-size: 0.5rem;
+      color: #666;
+      margin-top: 4rem;
+      padding-bottom: 2rem;
+    }
+
+    footer a {
+      color: #ff0000;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
 <body>
-  <div class="navbar">
-    <a class="link-wrapper" href="index.html">
-      <span class="fallback">Home</span>
-      <div class="img-wrapper">
-        <img class="normal" src="https://i.imgur.com/H4JD35M.png" />
-        <img class="active" src="https://i.imgur.com/ELytdKg.png" />
-      </div>
-      <div class="shape-wrapper">
-        <div class="shape red-fill jelly"><svg viewBox="0 0 108.1 47"><polygon fill="#FF0000" points="29.5,8.5 150.7,0 108.1,32.7 3.1,47"/></svg></div>
-        <div class="shape cyan-fill jelly"><svg viewBox="0 0 108.1 47"><polygon fill="#00FFFF" points="0.3,17 125.1,0 68.8,45.6 24.3,39"/></svg></div>
-      </div>
-    </a>
-
-    <a class="link-wrapper" href="hausaufgaben.html">
-      <span class="fallback">Hausaufgaben</span>
-      <div class="img-wrapper">
-        <img class="normal" src="https://i.imgur.com/YchoxsT.png" />
-        <img class="active" src="https://i.imgur.com/gebq1bn.png" />
-      </div>
-      <div class="shape-wrapper">
-        <div class="shape red-fill jelly"><svg viewBox="0 0 108.1 47"><polygon fill="#FF0000" points="29.5,8.5 150.7,0 108.1,32.7 3.1,47"/></svg></div>
-        <div class="shape cyan-fill jelly"><svg viewBox="0 0 108.1 47"><polygon fill="#00FFFF" points="0.3,17 125.1,0 68.8,45.6 24.3,39"/></svg></div>
-      </div>
-    </a>
-
-    <a class="link-wrapper" href="notizen.html">
-      <span class="fallback">Notizen</span>
-      <div class="img-wrapper">
-        <img class="normal" src="https://i.imgur.com/YchoxsT.png" />
-        <img class="active" src="https://i.imgur.com/gebq1bn.png" />
-      </div>
-      <div class="shape-wrapper">
-        <div class="shape red-fill jelly"><svg viewBox="0 0 108.1 47"><polygon fill="#FF0000" points="29.5,8.5 150.7,0 108.1,32.7 3.1,47"/></svg></div>
-        <div class="shape cyan-fill jelly"><svg viewBox="0 0 108.1 47"><polygon fill="#00FFFF" points="0.3,17 125.1,0 68.8,45.6 24.3,39"/></svg></div>
-      </div>
-    </a>
+  <div class="background">
+    <div class="stars"></div>
+    <div class="splatter"></div>
   </div>
+
+  <header class="title">
+    <h1>PHANTOM FILE // <span>M∀LICE</span></h1>
+    <p>Enter the shadows.</p>
+  </header>
+
+  <section class="desc">
+    Willkommen in der digitalen Schattenwelt von <strong>M∀LICE</strong>.  
+    Hier gibt es keine Regeln – nur Daten, Gedanken, Glitches.  
+    Eine Manifestation des Unterbewusstseins, digital verzerrt und frei.  
+    Bereit, das System zu infiltrieren?
+  </section>
+
+  <main class="menu">
+    <button class="p5-button">System</button>
+    <button class="p5-button">Terminal</button>
+    <button class="p5-button">Notizen</button>
+  </main>
+
+  <footer>
+    © 2025 <a href="https://github.com/malicempt07" target="_blank">M∀LICE</a> – Phantom Hack // Persona Layout
+  </footer>
 </body>
 </html>
