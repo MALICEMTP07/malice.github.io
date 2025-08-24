@@ -18,7 +18,13 @@
     #intro.hidden{opacity:0;pointer-events:none}
 
     /* Header */
-    header{background:var(--gelb);border-bottom:3px solid var(--gelb-d)}
+    header{
+      background:var(--gelb);
+      border-bottom:3px solid var(--gelb-d);
+      position:sticky;   /* bleibt beim Scrollen kleben */
+      top:0;
+      z-index:1000;
+    }
     .nav{max-width:1100px;margin:0 auto;padding:12px 16px;display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}
     .nav h1{margin:0;font-size:1.25rem}
     nav a{color:#111;text-decoration:none;font-weight:700;margin-right:12px}
