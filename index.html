@@ -12,6 +12,27 @@
       color: #222;
       line-height: 1.6;
     }
+
+    /* Intro Overlay */
+    #intro {
+      position: fixed;
+      inset: 0;
+      background: #ffd23f;
+      color: #111;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      font-weight: bold;
+      z-index: 9999;
+      cursor: pointer;
+      transition: opacity .7s ease;
+    }
+    #intro.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
     header {
       background: #ffd23f;
       padding: 1rem;
@@ -95,6 +116,9 @@
   </style>
 </head>
 <body>
+  <!-- Intro Overlay -->
+  <div id="intro">GBH Gerüstbau Hühr GmbH</div>
+
   <header>
     <h1>GBH Gerüstbau Hühr GmbH</h1>
     <nav>
@@ -187,6 +211,15 @@
 
   <script>
     document.getElementById('jahr').textContent = new Date().getFullYear();
+
+    const intro = document.getElementById('intro');
+    function hideIntro(){
+      intro.classList.add('hidden');
+      setTimeout(()=> intro.remove(), 800);
+    }
+    intro.addEventListener('click', hideIntro);
+    window.addEventListener('keydown', hideIntro);
+    window.addEventListener('touchstart', hideIntro);
   </script>
 </body>
 </html>
