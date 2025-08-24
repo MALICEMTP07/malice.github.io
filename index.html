@@ -1,162 +1,27 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8" />
-  <title>M∀LICE – Home</title>
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Testseite</title>
   <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background-color: #000;
-      color: white;
-      font-family: 'Press Start 2P', monospace;
-      overflow-x: hidden;
-    }
-
-    .title {
-      text-align: center;
-      margin-top: 4rem;
-    }
-
-    .title h1 {
-      font-size: 1.2rem;
-      color: #fff;
-      text-shadow: 0 0 5px red, 0 0 10px black;
-    }
-
-    .title h1 span {
-      color: red;
-      text-shadow: 0 0 3px white;
-    }
-
-    .title p {
-      color: #ff0;
-      font-size: 0.6rem;
-      margin-top: 0.5rem;
-      letter-spacing: 1px;
-    }
-
-    .desc {
-      max-width: 600px;
-      margin: 2rem auto;
-      text-align: center;
-      font-size: 0.5rem;
-      line-height: 1.6;
-      color: #ccc;
-      padding: 0 1rem;
-    }
-
-    .menu {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-top: 3rem;
-      gap: 2rem;
-    }
-
-    .p5-button {
-      background: red;
-      color: white;
-      font-size: 1rem;
-      padding: 1rem 2rem;
-      border: 3px solid white;
-      box-shadow: 4px 4px 0 black;
-      position: relative;
-      transition: all 0.15s ease;
-      cursor: pointer;
-      transform: skew(-10deg);
-    }
-
-    .p5-button::after {
-      content: '';
-      position: absolute;
-      top: -8px;
-      left: -8px;
-      width: 100%;
-      height: 100%;
-      border: 2px solid white;
-      transform: skew(-10deg);
-      opacity: 0.6;
-    }
-
-    .p5-button:hover {
-      background: white;
-      color: red;
-      transform: skew(-10deg) scale(1.05);
-      box-shadow: 6px 6px 0 black;
-    }
-
-    .background {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-      background: radial-gradient(ellipse at center, #111 0%, #000 100%);
-      overflow: hidden;
-    }
-
-    .stars, .splatter {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      background-repeat: repeat;
-      opacity: 0.08;
-      pointer-events: none;
-    }
-
-    .stars {
-      background-image: url('https://i.imgur.com/qVCkxgJ.png');
-    }
-
-    .splatter {
-      background-image: url('https://i.imgur.com/6tV2VYV.png');
-    }
-
-    footer {
-      text-align: center;
-      font-size: 0.5rem;
-      color: #666;
-      margin-top: 4rem;
-      padding-bottom: 2rem;
-    }
-
-    footer a {
-      color: #ff0000;
-      text-decoration: none;
-    }
-
-    footer a:hover {
-      text-decoration: underline;
-    }
+    html,body{height:100%;margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Arial,sans-serif;background:#0f0f12;color:#e8e8ea}
+    .wrap{min-height:100%;display:flex;align-items:center;justify-content:center;padding:4rem}
+    .card{max-width:720px;width:100%;background:#15151a;border:1px solid #2a2a31;border-radius:12px;padding:2rem;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+    h1{margin:0 0 .75rem;font-size:2rem}
+    p{line-height:1.6}
+    .box{margin-top:1rem;padding:1rem;border:1px dashed #3a3a46;border-radius:8px}
   </style>
 </head>
 <body>
-  <div class="background">
-    <div class="stars"></div>
-    <div class="splatter"></div>
+  <div class="wrap">
+    <main class="card" role="main">
+      <h1>Testseite</h1>
+      <p>Lorem ipsum dolor sit amet, consectetur blubb-trallala. Foo bar baz 123 — lorem wobble zigzag flupp.</p>
+      <div class="box">
+        <p>Knurps knarx flimflam; lorem ipsum ping pong zzzz. ☺︎</p>
+      </div>
+    </main>
   </div>
-
-  <header class="title">
-    <h1>PHANTOM FILE // <span>M∀LICE</span></h1>
-    <p>Enter the shadows.</p>
-  </header>
-
-  <section class="desc">
-    Willkommen in der digitalen Schattenwelt von <strong>M∀LICE</strong>.  
-    Hier gibt es keine Regeln – nur Daten, Gedanken, Glitches.  
-    Eine Manifestation des Unterbewusstseins, digital verzerrt und frei.  
-    Bereit, das System zu infiltrieren?
-  </section>
-
-  <main class="menu">
-    <button class="p5-button">System</button>
-    <button class="p5-button">Terminal</button>
-    <button class="p5-button">Notizen</button>
-  </main>
-
-  <footer>
-    © 2025 <a href="https://github.com/malicempt07" target="_blank">M∀LICE</a> – Phantom Hack // Persona Layout
-  </footer>
 </body>
 </html>
