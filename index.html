@@ -4,151 +4,115 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>GBH Gerüstbau Hühr GmbH – Anklam</title>
+  <meta name="description" content="GBH Gerüstbau Hühr GmbH – Gerüstbau, Vermietung & Montage in Anklam und Vorpommern.">
   <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f8f8f8;
-      color: #222;
-      line-height: 1.6;
+    :root{
+      --gelb:#ffd23f; --gelb-d:#e6b800; --bg:#f7f7f9; --fg:#222; --muted:#555;
+      --line:#e3e3e7; --card:#fff; --radius:10px;
     }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Arial,Helvetica,sans-serif;line-height:1.6;background:var(--bg);color:var(--fg)}
 
-    /* Intro Overlay */
-    #intro {
-      position: fixed;
-      inset: 0;
-      background: #ffd23f;
-      color: #111;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2rem;
-      font-weight: bold;
-      z-index: 9999;
-      cursor: pointer;
-      transition: opacity .7s ease;
-    }
-    #intro.hidden {
-      opacity: 0;
-      pointer-events: none;
-    }
+    /* Intro */
+    #intro{position:fixed;inset:0;background:var(--gelb);color:#111;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700;z-index:9999;cursor:pointer;transition:opacity .6s ease}
+    #intro.hidden{opacity:0;pointer-events:none}
 
-    header {
-      background: #ffd23f;
-      padding: 1rem;
-      border-bottom: 3px solid #e6b800;
-    }
-    header h1 {
-      margin: 0;
-      font-size: 1.4rem;
-    }
-    nav {
-      margin-top: .5rem;
-    }
-    nav a {
-      margin-right: 1rem;
-      text-decoration: none;
-      color: #222;
-      font-weight: bold;
-    }
-    nav a:hover {
-      text-decoration: underline;
-    }
-    section {
-      max-width: 960px;
-      margin: 0 auto;
-      padding: 2rem 1rem;
-    }
-    h2 {
-      margin-top: 0;
-      color: #1f1f1f;
-    }
-    .grid {
-      display: grid;
-      gap: 1rem;
-    }
-    @media (min-width: 700px) {
-      .grid {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-    .card {
-      background: #fff;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      padding: 1rem;
-    }
-    footer {
-      background: #eee;
-      text-align: center;
-      padding: 1rem;
-      margin-top: 2rem;
-      font-size: .9rem;
-      color: #555;
-    }
-    .contact-table {
-      border-collapse: collapse;
-      width: 100%;
-      background: #fff;
-    }
-    .contact-table td {
-      padding: .5rem;
-      border: 1px solid #ddd;
-    }
-    .contact-table td:first-child {
-      font-weight: bold;
-      width: 160px;
-      background: #fafafa;
-    }
-    .hero {
-      max-width: 960px;
-      margin: 0 auto;
-      padding: 2rem 1rem;
-      text-align: center;
-    }
-    .hero img {
-      max-width: 100%;
-      height: auto;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      margin-top: 1rem;
-    }
+    /* Header */
+    header{background:var(--gelb);border-bottom:3px solid var(--gelb-d)}
+    .nav{max-width:1100px;margin:0 auto;padding:12px 16px;display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+    .nav h1{margin:0;font-size:1.25rem}
+    nav a{color:#111;text-decoration:none;font-weight:700;margin-right:12px}
+    nav a:hover{text-decoration:underline}
+
+    /* Sections */
+    section{max-width:1100px;margin:0 auto;padding:28px 16px;border-bottom:1px solid var(--line)}
+    h2{margin:0 0 .5rem}
+    .hero{text-align:center}
+    .hero img{max-width:100%;height:auto;border-radius:var(--radius);border:1px solid #ccc;margin-top:12px}
+    .grid{display:grid;gap:14px}
+    @media(min-width:760px){.grid.cols-2{grid-template-columns:1fr 1fr}.grid.cols-3{grid-template-columns:repeat(3,1fr)}}
+    .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:14px}
+
+    .btn{display:inline-flex;align-items:center;gap:.4rem;background:#111;color:#fff;text-decoration:none;padding:.6rem .9rem;border-radius:8px}
+    .btn.alt{background:#fff;color:#111;border:1px solid var(--line)}
+    .btn-group{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+
+    .table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+    .table td{padding:.6rem .8rem;border-top:1px solid var(--line)}
+    .table tr:first-child td{border-top:none}
+    .table td:first-child{font-weight:700;background:#fafafa;width:180px}
+
+    /* Map */
+    .map-wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:14px}
+    @media(max-width:900px){.map-wrap{grid-template-columns:1fr}}
+    .map{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:#fff}
+    .open{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:10px}
+    .open li{display:flex;justify-content:space-between;border-top:1px dashed var(--line);padding:6px 0}
+    .open li:first-child{border-top:none}
+
+    /* FAQ */
+    details{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:.6rem .8rem}
+    details+details{margin-top:8px}
+    summary{cursor:pointer;font-weight:700}
+
+    /* Sticky actions (mobile) */
+    .sticky-actions{position:sticky;bottom:0;z-index:50;background:rgba(255,255,255,.9);backdrop-filter:saturate(140%) blur(6px);border-top:1px solid var(--line);padding:8px 12px;display:flex;gap:8px;justify-content:center}
+
+    /* Footer */
+    footer{padding:20px 16px;text-align:center;color:var(--muted)}
+    .legal{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+    .legal a{color:var(--muted);text-decoration:none}
+    .legal a:hover{text-decoration:underline}
+    dialog{max-width:760px;width:92%;border:1px solid var(--line);border-radius:10px}
+    dialog .head{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;border-bottom:1px solid var(--line)}
+    dialog .body{padding:12px}
   </style>
 </head>
 <body>
-  <!-- Intro Overlay -->
-  <div id="intro">GBH Gerüstbau Hühr GmbH</div>
+  <!-- Intro-Overlay -->
+  <div id="intro" title="Zum Start klicken/antippen oder Taste drücken">GBH Gerüstbau Hühr GmbH</div>
 
+  <!-- Kopf -->
   <header>
-    <h1>GBH Gerüstbau Hühr GmbH</h1>
-    <nav>
-      <a href="#leistungen">Leistungen</a>
-      <a href="#unternehmen">Unternehmen</a>
-      <a href="#kontakt">Kontakt</a>
-    </nav>
+    <div class="nav">
+      <h1>GBH Gerüstbau Hühr GmbH</h1>
+      <nav aria-label="Navigation">
+        <a href="#leistungen">Leistungen</a>
+        <a href="#unternehmen">Unternehmen</a>
+        <a href="#kontakt">Kontakt</a>
+        <a href="#anfahrt">Anfahrt</a>
+      </nav>
+    </div>
   </header>
 
-  <section class="hero">
+  <!-- Hero -->
+  <section class="hero" id="start">
     <h2>Gerüste. Sicher. Termintreu.</h2>
-    <p>Ihr Fachbetrieb für Fassaden- und Industriegerüste in Vorpommern.</p>
+    <p>Fachbetrieb für Fassaden- und Industriegerüste in Vorpommern.</p>
+    <div class="btn-group">
+      <a class="btn" href="tel:+493971214515">Anrufen: 03971&nbsp;214515</a>
+      <a class="btn alt" href="mailto:huehr@geruestbau-huehr.de?subject=Anfrage%20Ger%C3%BCstbau">E-Mail senden</a>
+      <a class="btn alt" href="#anfahrt">Route planen</a>
+    </div>
     <img src="images/istockphoto-1322489002-612x612.jpg" alt="Gerüstbau Beispielbild">
   </section>
 
+  <!-- Leistungen -->
   <section id="leistungen">
     <h2>Unsere Leistungen</h2>
-    <div class="grid">
+    <div class="grid cols-3">
       <div class="card">
         <h3>Fassadengerüste</h3>
         <ul>
-          <li>Gerüste für Neubau und Sanierung</li>
-          <li>Maler- und Dachdeckerarbeiten</li>
+          <li>Neubau & Sanierung</li>
+          <li>Maler- & Dacharbeiten</li>
           <li>Sichere Übergaben</li>
         </ul>
       </div>
       <div class="card">
-        <h3>Industrie & Sonderkonstruktionen</h3>
+        <h3>Industrie & Sonderbau</h3>
         <ul>
-          <li>Bühnen und Treppentürme</li>
+          <li>Bühnen, Treppentürme</li>
           <li>Einhausungen & Wetterschutz</li>
           <li>Individuelle Lösungen</li>
         </ul>
@@ -156,70 +120,166 @@
       <div class="card">
         <h3>Vermietung & Logistik</h3>
         <ul>
-          <li>Schneller Transport</li>
+          <li>Material & Transport</li>
           <li>Flexible Laufzeiten</li>
           <li>Faire Konditionen</li>
-        </ul>
-      </div>
-      <div class="card">
-        <h3>Sicherheit & Qualität</h3>
-        <ul>
-          <li>Normgerechte Montage</li>
-          <li>Regelmäßige Prüfungen</li>
-          <li>Zuverlässige Abnahmen</li>
         </ul>
       </div>
     </div>
   </section>
 
+  <!-- Unternehmen -->
   <section id="unternehmen">
     <h2>Über uns</h2>
-    <p>Die GBH Gerüstbau Hühr GmbH ist seit 1992 als Fachbetrieb in Anklam tätig. 
-      Wir stehen für zuverlässige Gerüstlösungen, erfahrene Monteure und termintreue Arbeit 
-      in Vorpommern und Umgebung.</p>
+    <div class="grid cols-2">
+      <div class="card">
+        <p>Seit 1992 als Fachbetrieb in Anklam aktiv. Wir stehen für zuverlässige Gerüstlösungen, erfahrene Monteure und termintreue Arbeit in Vorpommern und Umgebung.</p>
+      </div>
+      <div class="card">
+        <h3>Warum wir?</h3>
+        <ul>
+          <li>Erfahrene Teams & klare Abläufe</li>
+          <li>Dokumentierte Sicherheit & Abnahmen</li>
+          <li>Direkte Ansprechpartner</li>
+        </ul>
+      </div>
+    </div>
   </section>
 
+  <!-- Kontakt -->
   <section id="kontakt">
     <h2>Kontakt</h2>
-    <table class="contact-table">
-      <tr>
-        <td>Adresse</td>
-        <td>Bluthsluster Str. 25, 17389 Anklam</td>
-      </tr>
-      <tr>
-        <td>Telefon</td>
-        <td><a href="tel:+493971214515">03971 214515</a></td>
-      </tr>
-      <tr>
-        <td>Fax</td>
-        <td>03971 214514</td>
-      </tr>
-      <tr>
-        <td>E-Mail</td>
-        <td><a href="mailto:huehr@geruestbau-huehr.de">huehr@geruestbau-huehr.de</a></td>
-      </tr>
-      <tr>
-        <td>Web</td>
-        <td><a href="https://geruestbau-huehr.de" target="_blank">geruestbau-huehr.de</a></td>
-      </tr>
+    <table class="table" aria-label="Kontaktdaten">
+      <tr><td>Firma</td><td>GBH Gerüstbau Hühr GmbH</td></tr>
+      <tr><td>Adresse</td><td>Bluthsluster Str. 25, 17389 Anklam</td></tr>
+      <tr><td>Telefon</td><td><a href="tel:+493971214515">03971&nbsp;214515</a></td></tr>
+      <tr><td>Fax</td><td>03971&nbsp;214514</td></tr>
+      <tr><td>E-Mail</td><td><a href="mailto:huehr@geruestbau-huehr.de">huehr@geruestbau-huehr.de</a></td></tr>
+      <tr><td>Web</td><td><a href="https://geruestbau-huehr.de" target="_blank" rel="noopener">geruestbau-huehr.de</a></td></tr>
     </table>
   </section>
 
+  <!-- Anfahrt / Route -->
+  <section id="anfahrt">
+    <h2>Anfahrt & Route</h2>
+    <div class="map-wrap">
+      <div class="map" aria-label="Karte">
+        <iframe
+          title="GBH Gerüstbau Hühr GmbH – Standort"
+          width="100%" height="320" style="border:0" loading="lazy" allowfullscreen
+          referrerpolicy="no-referrer-when-downgrade"
+          src="https://www.google.com/maps?q=Bluthsluster+Str.+25,+17389+Anklam&output=embed">
+        </iframe>
+      </div>
+      <div class="card">
+        <h3>Route planen</h3>
+        <p>Startadresse eingeben und Route in Google Maps öffnen:</p>
+        <form id="routeForm" onsubmit="planRoute(event)">
+          <input id="origin" type="text" placeholder="Startadresse" style="width:100%;padding:.6rem;border:1px solid var(--line);border-radius:8px" aria-label="Startadresse">
+          <div class="btn-group" style="justify-content:flex-start;margin-top:8px">
+            <button class="btn" type="submit">Route öffnen</button>
+            <a class="btn alt" target="_blank" rel="noopener"
+               href="https://maps.google.com/?q=Bluthsluster+Str.+25,+17389+Anklam">Nur Standort</a>
+          </div>
+        </form>
+
+        <h3 style="margin-top:16px">Öffnungszeiten</h3>
+        <ul class="open" aria-label="Öffnungszeiten">
+          <li><span>Mo–Fr</span><span>08:00–16:00</span></li>
+          <li><span>Sa</span><span>nach Absprache</span></li>
+          <li><span>So/Feiertag</span><span>geschlossen</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <h2>FAQ</h2>
+    <details>
+      <summary>Welche Gerüstklassen bieten Sie an?</summary>
+      <p>Von leichten Arbeitsgerüsten bis zu stärkeren Lastklassen – je nach Projektanforderung.</p>
+    </details>
+    <details>
+      <summary>Wie schnell ist eine Montage möglich?</summary>
+      <p>Dank kurzer Wege in der Region sind oft kurzfristige Termine realisierbar – bitte anrufen.</p>
+    </details>
+    <details>
+      <summary>Vermieten Sie auch ohne Montage?</summary>
+      <p>Ja, Vermietung ist möglich. Wir beraten zu Material, Transport und Sicherheit.</p>
+    </details>
+  </section>
+
+  <!-- Sticky Actions (mobile) -->
+  <div class="sticky-actions" aria-label="Schnellzugriff">
+    <a class="btn" href="tel:+493971214515">Anrufen</a>
+    <a class="btn alt" href="mailto:huehr@geruestbau-huehr.de?subject=Anfrage%20Ger%C3%BCstbau">E-Mail</a>
+    <a class="btn alt" href="#anfahrt">Route</a>
+  </div>
+
+  <!-- Footer -->
   <footer>
     © <span id="jahr"></span> GBH Gerüstbau Hühr GmbH – Anklam
+    <div class="legal">
+      <a href="#impressum" onclick="document.getElementById('imp').showModal();return false;">Impressum</a>
+      <a href="#datenschutz" onclick="document.getElementById('ds').showModal();return false;">Datenschutz</a>
+      <a href="#top" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">Nach oben</a>
+    </div>
   </footer>
 
+  <!-- Impressum -->
+  <dialog id="imp">
+    <div class="head">
+      <strong>Impressum</strong>
+      <form method="dialog"><button>Schließen</button></form>
+    </div>
+    <div class="body">
+      <p><strong>GBH Gerüstbau Hühr GmbH</strong><br>
+        Bluthsluster Str. 25, 17389 Anklam<br>
+        Tel. 03971&nbsp;214515 • E-Mail: <a href="mailto:huehr@geruestbau-huehr.de">huehr@geruestbau-huehr.de</a></p>
+      <p>Handelsregister: HRB 11494, Amtsgericht Neubrandenburg (vormals Stralsund).<br>
+         Vertretungsberechtigte: (Angaben bei Bedarf ergänzen)</p>
+    </div>
+  </dialog>
+
+  <!-- Datenschutz -->
+  <dialog id="ds">
+    <div class="head">
+      <strong>Datenschutzhinweis</strong>
+      <form method="dialog"><button>Schließen</button></form>
+    </div>
+    <div class="body">
+      <p>Diese statische Seite setzt keine Cookies. Bei Kontakt per Telefon/E-Mail gelten die Bedingungen Ihres Anbieters.</p>
+    </div>
+  </dialog>
+
   <script>
+    // Jahr
     document.getElementById('jahr').textContent = new Date().getFullYear();
 
+    // Intro automatisch nach 1 Sekunde schließen
     const intro = document.getElementById('intro');
     function hideIntro(){
+      if(!intro) return;
       intro.classList.add('hidden');
-      setTimeout(()=> intro.remove(), 800);
+      setTimeout(()=> intro.remove(), 650);
     }
-    intro.addEventListener('click', hideIntro);
-    window.addEventListener('keydown', hideIntro);
-    window.addEventListener('touchstart', hideIntro);
+    setTimeout(hideIntro, 1000);
+    ['click','keydown','touchstart'].forEach(ev =>
+      window.addEventListener(ev, hideIntro, {once:true})
+    );
+
+    // Routen-Planer
+    function planRoute(e){
+      e.preventDefault();
+      const origin = document.getElementById('origin').value.trim();
+      const dest = 'Bluthsluster Str. 25, 17389 Anklam';
+      const base = 'https://www.google.com/maps/dir/?api=1';
+      const url = origin
+        ? `${base}&origin=${encodeURIComponent(origin)}&destination=${encodeURIComponent(dest)}&travelmode=driving`
+        : `https://maps.google.com/?q=${encodeURIComponent(dest)}`;
+      window.open(url,'_blank','noopener');
+    }
   </script>
 </body>
 </html>
